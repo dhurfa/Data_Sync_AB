@@ -1,0 +1,147 @@
+<nav class="navbar navbar-expand-md">
+    <button id="disabledBtn" class="nav-link" routerLinkActive="active"  class="btn btn-primary"
+    [disabled]="data.Position" (click)="onCreateClick()">Create Entry</button>
+    <div id="navb" class="navbar-collapse collapse hide">
+      <ul class="nav navbar-nav ml-auto">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#editModal" (click)="openPopup($event)">
+                Edit Entry
+            </button>
+      </ul>
+    </div>
+</nav>
+
+<div class="row mt-1 mb-2">
+    <div class="card card-primary">
+        <div class="card-header">
+            <div class="card-title">
+                <h1>User Info</h1>
+            </div>
+        </div>
+        <table id="TestIf" class="table" *ngIf="!data.null">
+                <tr>
+                    <td>First Name</td>
+                    <td id="firstName">{{data.FirstName}}</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>{{data.LastName}}</td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td>{{data.Born | date : 'longDate'}}</td>
+                </tr>
+                <tr>
+                    <td>Date of Admission</td>
+                    <td>{{data.Admission | date : 'longDate'}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{data.Email }}</td>
+                </tr>
+                <tr>
+                    <td>Practicing Area</td>
+                    <td>{{data.PracticingArea}}</td>
+                </tr>
+                <tr>
+                    <td>Practice Location</td>
+                    <td>{{data.PracticeLocation}}</td>
+                </tr>
+                <tr>
+                    <td>Position</td>
+                    <td>{{data.Position}}</td>
+                </tr>
+        </table>
+    </div>
+</div>
+
+
+<form #form ='ngForm' novalidate="novalidate">
+     <div class="modal" tabindex="-1"  role="dialog" [ngStyle]="{'display':displayStyle}" id="editModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Entry</h4>
+                    </div>
+                 <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="FirstName" class="col-sm-4 col-form-label">First Name</label>
+                            <div class="col-sm-12">
+                                <input #FirstName= "ngModel" type="text" id="FirstName" class="form-control" name="FirstName"
+                                [(ngModel)]="editEntry.FirstName" required="required" minlength="5" maxlength="35">
+                                <span *ngIf="FirstName.touched && FirstName.invalid" class="text-danger">
+                                    First name is required
+                                </span>
+                                <span  *ngIf="FirstName.errors?.['minlength']" class="text-danger">
+                                    First name must contain atleast 5 characters
+                                </span>
+                                <span  *ngIf="FirstName.errors?.['maxlength']" class="text-danger">
+                                    First name cannot exceed more than 35 characters
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="LastName" class="col-sm-4 col-form-label">Last Name</label>
+                            <div class="col-sm-12">
+                                <input #LastName ="ngModel" type="text" id="LastName" class="form-control" name="LastName"
+                                [(ngModel)]="editEntry.LastName" required="required" minlength="5" maxlength="35">
+                            </div>
+                            <span id="LastNameError" *ngIf="LastName.touched && LastName.invalid" class="text-danger">
+                                Last name is required
+                            </span>
+                            <span id="LastNameError" *ngIf="LastName.errors?.['minlength']" class="text-danger">
+                                Last name must contain atleast 5 characters
+                            </span>
+                            <span id="LastNameError" *ngIf="FirstName.errors?.['maxlength']" class="text-danger">
+                                Last name cannot exceed more than 35 characters
+                            </span>
+                        </div>
+  
+                      <div class="form-group row">
+                          <label for="Admission" class="col-sm-4 col-form-label">Admission</label>
+                          <div class="col-sm-12">
+                              <input #Admission ="ngModel" type="date" id="Admission" class="form-control" name="Admission"
+                              [(ngModel)]="editEntry.Admission" required="required">
+                          </div>
+                          <span id="admissionError" *ngIf="Admission.touched && Admission.errors?.['required']" class="text-danger">
+                            Date of Admission is required
+                        </span>
+                          <span id="admissionError" *ngIf="customValidatorsService.MaxAgeValidation(72,1)">
+                            Enter valid year
+                         </span>
+                      </div>
+  
+                      <div class="form-group row">
+                          <label for="PracticingArea" class="col-sm-4 col-form-label">Practicing Area</label>
+                          <div class="col-sm-12">
+                              <input #PracticingArea = "ngModel" type="text" id="PracticingArea" class="form-control" name="PracticingArea"
+                              [(ngModel)]="editEntry.PracticingArea" required="required" maxlength="100">
+                          </div>
+                          <span id="areaError" *ngIf="PracticingArea.touched && PracticingArea.errors?.['required']" class="text-danger">
+                            Practicing area is required
+                          </span>
+                          <span id="areaError" *ngIf="PracticingArea.touched && PracticingArea.errors?.['maxlength']" class="text-danger">
+                            Practicing area cannot have more than 100 characters
+                          </span>
+                      </div>
+  
+                      <div class="form-group row">
+                          <label for="PracticeLocation" class="col-sm-4 col-form-label">Practice Location</label>
+                          <div class="col-sm-12">
+                              <input #PracticeLocation = "ngModel" type="text" id="PracticeLocation" class="form-control" name="PracticeLocation" 
+                              [(ngModel)]="editEntry.PracticeLocation" required="required">
+                          </div>
+                          <span id="locationError" *ngIf="PracticeLocation.touched && PracticeLocation.errors?.['required']" class="text-danger">
+                            Practice Location is required
+                        </span>
+                        </div>
+                  </div>
+  
+                  <div class="modal-footer">
+                      <button class="btn btn-warning"  (click)="closePopup()" data-dismiss="modal">Cancel</button>
+                      <button id="UpdateBtn" class="btn btn-success" data-dismiss="modal" (click)="onUpdateClick()">Update</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form>
+
