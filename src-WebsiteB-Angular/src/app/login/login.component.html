@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 mx-auto">
+            <div class="card mt-4">
+                <div class="card-header bg-secondary text-white">
+                    <h3>Login</h3>
+                </div> 
+                <div class="card-body">
+                    <form class="form" #form ='ngForm' >
+                        <div class="form-group form-row">
+                            <label for="UserName" class="col-md-4 col-form-label">
+                                Username
+                            </label>
+                            <input id="UserName" #UserName = "ngModel" type="text" class="form-control" placeholder="UserName" [(ngModel)]="loginViewModel.UserName"
+                            name="UserName" autofocus="autofocus" required>
+                            <span id="UserNameError" *ngIf="UserName.touched && UserName.invalid" class="text-danger">
+                                Username is required
+                            </span>
+                        </div>
+
+                        <div class="form-group form-row">
+                            <label for="Password" class="col-md-4 col-form-label">
+                                Password
+                            </label>
+                            <input id="Password" #Password="ngModel" type="password" class="form-control" placeholder="Password" [(ngModel)]="loginViewModel.Password"
+                            name="Password" required minlength="6"> 
+                            <span id="PasswordError" class="text-danger" *ngIf="Password.touched && Password.errors?.['required']">
+                                Password is required
+                            </span>
+                            <span class="text-danger" *ngIf="Password.touched && Password.errors?.['minlength']">
+                                Password must contain atleast 6 characters
+                            </span>
+                        </div>
+                
+
+
+                        <div class=" form-group text-right">
+                            <span class="text-danger">
+                                {{loginError}}&nbsp;
+                            </span>
+                            <button id="Btn" class="btn btn-primary" (click)="onLoginClick($event)" [disabled]="form.invalid">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

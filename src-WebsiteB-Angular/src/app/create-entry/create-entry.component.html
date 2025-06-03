@@ -1,0 +1,90 @@
+<form  [formGroup]="newEntryForm">
+    <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <h1 class="col-sm-2 col-sm-2 col-form-label">New Entry</h1>
+        <div class="modal-body">
+                      <div class="form-group row">
+                          <label for="FirstName" class="col-sm-2 col-form-label">First Name</label>
+                          <div class="col-sm-6">
+                              <input formControlName="FirstName" type="text" id="FirstName" class="form-control" placeholder="Enter your First name" name="FirstName">
+                              <span class="col-md-12 text-danger" *ngIf="newEntryForm.controls['FirstName'].touched && newEntryForm.hasError('required','FirstName')">First name is required</span>
+                              <span class="col-md-12 text-danger" *ngIf="newEntryForm.controls['FirstName'].touched && newEntryForm.hasError('minlength','FirstName')">First name must contain atleast 5 characters</span>
+                              <span class="col-md-12 text-danger" *ngIf="newEntryForm.controls['FirstName'].touched && newEntryForm.hasError('maxlength','FirstName')">First name cannot contain more than 35 characters</span>
+                          </div>
+                      </div>
+  
+                      <div class="form-group row">
+                          <label for="LastName" class="col-sm-2 col-form-label">Last Name</label>
+                          <div class="col-sm-6">
+                              <input formControlName="LastName" type="text" id="LastName" class="form-control" placeholder="Enter your Last name" name="LastName">
+                              <span id="LastNameError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['LastName'].touched && newEntryForm.hasError('required','LastName')">Last name is required</span>
+                              <span id="LastNameError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['LastName'].touched && newEntryForm.hasError('minlength','LastName')">Last name must contain atleast 5 characters</span>
+                              <span id="LastNameError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['LastName'].touched && newEntryForm.hasError('maxlength','LastName')">Last name cannot contain more than 35 characters</span>
+                          </div>
+                      </div>
+  
+                      <div class="form-group row">
+                          <label for="Email" class="col-sm-2 col-form-label">Email</label>
+                          <div class="col-sm-6">
+                              <input formControlName="Email" type="email" id="Email" class="form-control" placeholder="Enter your Email" name="Email" >
+                              <span id="EmailError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['Email'].touched && newEntryForm.hasError('required','Email')">Email is required</span>
+                              <span id="EmailError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['Email'].touched && newEntryForm.hasError('email','Email')">Enter valid email address</span>
+                          </div>
+                      </div>
+  
+                      <div class="form-group row">
+                          <label for="dob" class="col-sm-2 col-form-label">Date of Birth</label>
+                          <div class="col-sm-6">
+                              <input formControlName="Born" type="date" id="dob" class="form-control" placeholder="Enter your Date of Birth" name="dob" >
+                              <span id="DobError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['Born'].touched && newEntryForm.hasError('required','Born')">Date of Birth is required</span>
+                              <span id="DobError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['Born'].touched && newEntryForm.hasError('maxAgeBorn','Born')">Enter valid year</span>
+                          </div>
+                      </div>
+  
+                      <div class="form-group row">
+                          <label for="admission" class="col-sm-2 col-form-label">Date of Admission</label>
+                          <div class="col-sm-6">
+                              <input formControlName="Admission" type="date" id="admission" class="form-control" placeholder="Enter Date of Admission" name="admission" >
+                              <span id="AdmissionError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['Admission'].touched && newEntryForm.hasError('required','Admission')">Date of Admission is required</span>
+                              <span id="AdmissionError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['Admission'].touched && newEntryForm.hasError('maxAgeForAdmission','Admission')">Enter valid year</span>
+                          </div>
+
+                      </div>
+  
+                      <div class="form-group row">
+                          <label for="area" class="col-sm-2 col-form-label">Practicing Area</label>
+                          <div class="col-sm-6">
+                              <input formControlName="PracticingArea" type="text" id="area" class="form-control" placeholder="Enter your practicing area" name="area">
+                              <span id="AreaError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['PracticingArea'].touched && newEntryForm.hasError('required','PracticingArea')">Practicing area is required</span>
+                              <span id="AreaError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['PracticingArea'].touched && newEntryForm.hasError('maxlength','PracticingArea')">Practicing area cannot contain nore than 100 characters</span>
+                          </div>
+                      </div>
+  
+                      <div class="form-group row">
+                          <label for="location" class="col-sm-2 col-form-label">Practice Location</label>
+                          <div class="col-sm-6">
+                              <input formControlName="PracticeLocation" type="text" id="location" class="form-control" placeholder="Enter your practice location" name="location">
+                              <span id="LocationError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['PracticeLocation'].touched && newEntryForm.hasError('required','PracticeLocation')">Practice Location is required</span>
+                          </div>
+                      </div>
+  
+                      <div class="form-group row">
+                          <label for="position" class="col-sm-2 col-form-label">Position</label>
+                          <div class="col-sm-6">
+                              <input formControlName="Position" type="text" id="position" class="form-control" placeholder="Enter your position" name="position">
+                              <span id="PositionError" class="col-md-12 text-danger" *ngIf="newEntryForm.controls['Position'].touched && newEntryForm.hasError('required','Position')">Position is required</span>
+                          </div>
+                      </div>
+  
+                  </div>
+  
+                  <div>
+                      <button class="btn btn-warning"  data-dismiss="modal" (click)="onCancelClick()">Cancel</button>
+                      <button id="BtnSave" class="btn btn-success " data-dismiss="modal" (click)="onCreateEntryClick($event)">Save</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form>
+
